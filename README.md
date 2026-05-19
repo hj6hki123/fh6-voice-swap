@@ -27,4 +27,4 @@ src-tauri/target/release/fh6-voice-swap.exe
 
 ## License
 
-MIT License
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
