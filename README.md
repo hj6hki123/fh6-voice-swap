@@ -2,7 +2,7 @@
 
 Annoyed that the game ties text and voice language together? This Windows tool lets you use a different voice language without changing the text language you normally play with.
 
-The app locates the game's `StringTables` text files, copies your current text language `.zip`, and overwrites the target language `.zip`. After that, when you set the game to the target language, the game keeps using that target language's voice while reading the replaced text files. Before overwriting anything, the original target `.zip` is saved as `.zip.bak` so it can be restored from the backup manager.
+The app locates the game's `StringTables` text files, copies your current text language `.zip`, and overwrites the target language `.zip`. After that, when you set the game to the target language, the game keeps using that target language's voice while reading the replaced text files. Before overwriting anything, the original target `.zip` is saved once as `.zip.bak` and kept until you restore it from the backup manager.
 
 ## Usage
 
@@ -14,7 +14,7 @@ The app locates the game's `StringTables` text files, copies your current text l
 6. Start the game and set the in-game language to the selected voice target.
 7. Use the backup manager if you want to restore the original file later.
 
-The original file is backed up automatically as `.zip.bak`. You can restore or delete backups from the backup manager.
+Each target language keeps one original `.zip.bak` backup. Existing backups are not overwritten by later swaps.
 
 ## Build
 

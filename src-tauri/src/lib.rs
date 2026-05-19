@@ -199,24 +199,6 @@ fn do_restore(dir: String, code: String) -> Result<(), String> {
 }
 
 #[tauri::command]
-fn delete_backup(dir: String, code: String) -> Result<(), String> {
-    let dst = resolve_zip(&dir, &code)?;
-    let mut bak = dst.clone();
-    let mut bak_name = dst
-        .file_name()
-        .and_then(|n| n.to_str())
-        .ok_or("invalid path")?
-        .to_string();
-    bak_name.push_str(".bak");
-    bak.set_file_name(&bak_name);
-    if !bak.exists() {
-        return Err("Backup file not found".into());
-    }
-    fs::remove_file(&bak).map_err(|e| e.to_string())?;
-    Ok(())
-}
-
-#[tauri::command]
 fn reset_all(dir: String) -> Result<u32, String> {
     let dir_path = Path::new(&dir);
     if !dir_path.is_dir() {
@@ -258,7 +240,6 @@ pub fn run() {
             scan_folder,
             do_swap,
             do_restore,
-            delete_backup,
             reset_all
         ])
         .run(tauri::generate_context!())

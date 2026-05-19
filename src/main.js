@@ -37,20 +37,16 @@ const I18N = {
     backup_reset_all: 'Restore All',
     backup_empty: 'No backups — they appear automatically after a swap',
     backup_restore: 'Restore',
-    backup_delete: 'Delete',
     modal_yes: 'Confirm',
     modal_no: 'Cancel',
     modal_swap_title: 'Confirm Swap',
     modal_swap_body: (d, v) => `Copy <b>${d.name}</b> text into the <b>${v.name}</b> language slot.<br>Then set the in-game language to <b>${v.name}</b> to keep <b>${v.name}</b> voice with <b>${d.name}</b> text.<br><span style="color:var(--text-mute);font-size:12px">Original ${v.name} StringTables file is backed up to ${v.code}.zip.bak</span>`,
     modal_restore_title: 'Restore Backup',
     modal_restore_body: (info) => `Restore <b>${info.name} (${info.code})</b> from backup. The backup file will be deleted afterward.`,
-    modal_delete_title: 'Delete Backup',
-    modal_delete_body: (code) => `Permanently delete <b>${code}.zip.bak</b>. <span style="color:var(--danger)">This cannot be undone.</span> The game file itself is not touched.`,
     modal_reset_title: 'Restore All',
     modal_reset_body: (n) => `Restore all <b>${n}</b> overwritten file${n>1?'s':''} from their backups, returning the game to original state.`,
     toast_swap_ok: (d, v) => `✓ Swapped · ${d} text into ${v}. Set the game language to ${v}; if it does not take effect, change it manually in game settings.`,
     toast_restore_ok: (c) => `✓ Restored ${c}`,
-    toast_delete_ok: (c) => `✓ Deleted backup of ${c}`,
     toast_reset_ok: (n) => `✓ Restored ${n} file${n>1?'s':''}`,
     toast_err: (msg) => `Error: ${msg}`,
     warn_source_modified: 'This language file has been overwritten and cannot be used as a source. Restore it first.',
@@ -76,20 +72,16 @@ const I18N = {
     backup_reset_all: '全部還原',
     backup_empty: '目前沒有任何備份 — 執行替換後會自動產生',
     backup_restore: '還原',
-    backup_delete: '刪除',
     modal_yes: '確定',
     modal_no: '取消',
     modal_swap_title: '確認替換',
     modal_swap_body: (d, v) => `將 <b>${d.name}</b> 的文字複製到 <b>${v.name}</b> 語言槽。<br>接著進遊戲把語言設為 <b>${v.name}</b>，就會保留 <b>${v.name}</b> 語音並顯示 <b>${d.name}</b> 文字。<br><span style="color:var(--text-mute);font-size:12px">原始 ${v.name} StringTables 檔會備份為 ${v.code}.zip.bak</span>`,
     modal_restore_title: '還原備份',
     modal_restore_body: (info) => `將以備份還原 <b>${info.name} (${info.code})</b>，還原後備份檔會被刪除。`,
-    modal_delete_title: '刪除備份',
-    modal_delete_body: (code) => `將永久刪除 <b>${code}.zip.bak</b>。<span style="color:var(--danger)">此操作無法復原</span>。遊戲檔案本身不會被動到。`,
     modal_reset_title: '全部還原',
     modal_reset_body: (n) => `將還原全部 <b>${n}</b> 個被覆寫的檔案，遊戲回到原始狀態。`,
     toast_swap_ok: (d, v) => `✓ 已將 ${d} 文字替換到 ${v}。請將遊戲語言設為 ${v}；若沒有生效，請手動到遊戲設定裡更改。`,
     toast_restore_ok: (c) => `✓ 已還原 ${c}`,
-    toast_delete_ok: (c) => `✓ 已刪除 ${c} 的備份`,
     toast_reset_ok: (n) => `✓ 已還原 ${n} 個檔案`,
     toast_err: (msg) => `錯誤: ${msg}`,
     warn_source_modified: '這個語言檔已經被覆寫，不能當作來源。請先還原它。',
@@ -115,20 +107,16 @@ const I18N = {
     backup_reset_all: '全て復元',
     backup_empty: 'バックアップがありません — 置換後に自動生成されます',
     backup_restore: '復元',
-    backup_delete: '削除',
     modal_yes: '確定',
     modal_no: 'キャンセル',
     modal_swap_title: '置換の確認',
     modal_swap_body: (d, v) => `<b>${d.name}</b> のテキストを <b>${v.name}</b> の言語スロットへコピーします。<br>その後、ゲーム内言語を <b>${v.name}</b> に設定すると、<b>${v.name}</b> 音声のまま <b>${d.name}</b> テキストを表示できます。<br><span style="color:var(--text-mute);font-size:12px">元の ${v.name} StringTables ファイルは ${v.code}.zip.bak にバックアップされます</span>`,
     modal_restore_title: 'バックアップから復元',
     modal_restore_body: (info) => `<b>${info.name} (${info.code})</b> をバックアップから復元します。復元後バックアップは削除されます。`,
-    modal_delete_title: 'バックアップ削除',
-    modal_delete_body: (code) => `<b>${code}.zip.bak</b> を完全に削除します。<span style="color:var(--danger)">この操作は取り消せません</span>。ゲームファイル自体は変更されません。`,
     modal_reset_title: '全て復元',
     modal_reset_body: (n) => `上書きされた <b>${n}</b> ファイル全てを復元し、ゲームを初期状態に戻します。`,
     toast_swap_ok: (d, v) => `✓ ${d} テキストを ${v} に置換しました。ゲーム内言語を ${v} に設定してください。反映されない場合はゲーム設定で手動変更してください。`,
     toast_restore_ok: (c) => `✓ ${c} を復元しました`,
-    toast_delete_ok: (c) => `✓ ${c} のバックアップを削除`,
     toast_reset_ok: (n) => `✓ ${n} ファイルを復元しました`,
     toast_err: (msg) => `エラー: ${msg}`,
     warn_source_modified: 'この言語ファイルは上書き済みのため、ソースとして使用できません。先に復元してください。',
@@ -154,20 +142,16 @@ const I18N = {
     backup_reset_all: 'Restaurar todo',
     backup_empty: 'No hay copias; aparecerán automáticamente después de un cambio',
     backup_restore: 'Restaurar',
-    backup_delete: 'Eliminar',
     modal_yes: 'Confirmar',
     modal_no: 'Cancelar',
     modal_swap_title: 'Confirmar cambio',
     modal_swap_body: (d, v) => `Copiar el texto de <b>${d.name}</b> en el espacio de idioma <b>${v.name}</b>.<br>Luego configura el idioma del juego en <b>${v.name}</b> para mantener la voz de <b>${v.name}</b> con texto de <b>${d.name}</b>.<br><span style="color:var(--text-mute);font-size:12px">El archivo StringTables original de ${v.name} se guarda como ${v.code}.zip.bak</span>`,
     modal_restore_title: 'Restaurar copia',
     modal_restore_body: (info) => `Restaurar <b>${info.name} (${info.code})</b> desde la copia. El archivo de copia se eliminará después.`,
-    modal_delete_title: 'Eliminar copia',
-    modal_delete_body: (code) => `Eliminar permanentemente <b>${code}.zip.bak</b>. <span style="color:var(--danger)">Esta acción no se puede deshacer.</span> El archivo del juego no se modifica.`,
     modal_reset_title: 'Restaurar todo',
     modal_reset_body: (n) => `Restaurar ${n} archivo${n>1?'s':''} sobrescrito${n>1?'s':''} desde sus copias y devolver el juego a su estado original.`,
     toast_swap_ok: (d, v) => `✓ Texto de ${d} aplicado a ${v}. Configura el idioma del juego en ${v}; si no funciona, cámbialo manualmente en los ajustes del juego.`,
     toast_restore_ok: (c) => `✓ ${c} restaurado`,
-    toast_delete_ok: (c) => `✓ Copia de ${c} eliminada`,
     toast_reset_ok: (n) => `✓ ${n} archivo${n>1?'s':''} restaurado${n>1?'s':''}`,
     toast_err: (msg) => `Error: ${msg}`,
     warn_source_modified: 'Este archivo de idioma fue sobrescrito y no puede usarse como fuente. Restáuralo primero.',
@@ -193,20 +177,16 @@ const I18N = {
     backup_reset_all: '모두 복원',
     backup_empty: '백업 없음 - 교체 후 자동으로 생성됩니다',
     backup_restore: '복원',
-    backup_delete: '삭제',
     modal_yes: '확인',
     modal_no: '취소',
     modal_swap_title: '교체 확인',
     modal_swap_body: (d, v) => `<b>${d.name}</b> 텍스트를 <b>${v.name}</b> 언어 슬롯에 복사합니다.<br>그다음 게임 언어를 <b>${v.name}</b>로 설정하면 <b>${v.name}</b> 음성을 유지하면서 <b>${d.name}</b> 텍스트를 표시합니다.<br><span style="color:var(--text-mute);font-size:12px">원본 ${v.name} StringTables 파일은 ${v.code}.zip.bak으로 백업됩니다</span>`,
     modal_restore_title: '백업 복원',
     modal_restore_body: (info) => `<b>${info.name} (${info.code})</b>를 백업에서 복원합니다. 복원 후 백업 파일은 삭제됩니다.`,
-    modal_delete_title: '백업 삭제',
-    modal_delete_body: (code) => `<b>${code}.zip.bak</b>을 영구 삭제합니다. <span style="color:var(--danger)">이 작업은 되돌릴 수 없습니다.</span> 게임 파일 자체는 변경되지 않습니다.`,
     modal_reset_title: '모두 복원',
     modal_reset_body: (n) => `덮어쓰기된 파일 ${n}개를 모두 백업에서 복원하여 게임을 원본 상태로 되돌립니다.`,
     toast_swap_ok: (d, v) => `✓ ${d} 텍스트를 ${v}에 적용했습니다. 게임 언어를 ${v}로 설정하세요. 적용되지 않으면 게임 설정에서 수동으로 변경하세요.`,
     toast_restore_ok: (c) => `✓ ${c} 복원됨`,
-    toast_delete_ok: (c) => `✓ ${c} 백업 삭제됨`,
     toast_reset_ok: (n) => `✓ 파일 ${n}개 복원됨`,
     toast_err: (msg) => `오류: ${msg}`,
     warn_source_modified: '이 언어 파일은 이미 덮어쓰기되어 원본으로 사용할 수 없습니다. 먼저 복원하세요.',
@@ -483,7 +463,6 @@ function renderBackups() {
       </div>
       <div class="backup-actions">
         <button class="primary-btn" data-action="restore" data-code="${b.code}">${t('backup_restore')}</button>
-        <button class="danger-btn" data-action="delete" data-code="${b.code}">${t('backup_delete')}</button>
       </div>
     `;
     backupList.appendChild(row);
@@ -492,7 +471,6 @@ function renderBackups() {
     btn.addEventListener('click', () => {
       const code = btn.dataset.code;
       if (btn.dataset.action === 'restore') doRestore(code);
-      else doDeleteBackup(code);
     });
   });
 }
@@ -576,17 +554,6 @@ async function doRestore(code) {
   try {
     await invoke('do_restore', { dir: state.dir, code });
     showToast(t('toast_restore_ok', code), 'success');
-    await refreshFolder();
-  } catch (e) {
-    showToast(t('toast_err', String(e)), 'error');
-  }
-}
-
-async function doDeleteBackup(code) {
-  if (!await confirmDialog(t('modal_delete_title'), t('modal_delete_body', code))) return;
-  try {
-    await invoke('delete_backup', { dir: state.dir, code });
-    showToast(t('toast_delete_ok', code), 'success');
     await refreshFolder();
   } catch (e) {
     showToast(t('toast_err', String(e)), 'error');
