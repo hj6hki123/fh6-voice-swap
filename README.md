@@ -1,6 +1,6 @@
 # Forza Horizon 6 Voice Swap
 
-A small Windows tool for swapping Forza Horizon 6 voice language files while keeping backups.
+Annoyed that the game ties text and voice language together? This Windows tool lets you use a different voice language by replacing the game's language files and creating matching backups before anything is overwritten.
 
 ## Usage
 
