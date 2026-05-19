@@ -8,10 +8,10 @@ The app locates the game's `StringTables` text files, copies your current text l
 
 1. Download and run `fh6-voice-swap-*-windows-x64.exe` from the release page.
 2. If the game path is not detected, click `Select EXE` and choose `ForzaHorizon6.exe` from the game install folder.
-3. Select the text language you want to keep in the first dropdown.
-4. Select the voice language slot you want to use in the second dropdown.
+3. Select the text language you want to see in the first dropdown.
+4. Select the voice language you want to hear in the second dropdown.
 5. Click `Execute Swap`.
-6. Start the game and set the in-game language to the selected voice language slot.
+6. Start the game and set the in-game language to the selected voice language.
 7. Use the backup manager if you want to restore the original file later.
 
 Each target language keeps one original `.zip.bak` backup. Existing backups are not overwritten by later swaps.
