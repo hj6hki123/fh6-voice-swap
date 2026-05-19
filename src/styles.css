@@ -24,23 +24,32 @@
   --danger: #ef4444;
   --radius: 14px;
   --radius-sm: 8px;
+  --page-pad-x: clamp(18px, 3.4vw, 32px);
+  --hero-pad-top: clamp(12px, 2.8vh, 18px);
+  --card-pad-y: clamp(11px, 1.8vh, 14px);
+  --card-pad-x: clamp(13px, 1.7vw, 16px);
+  --section-gap: clamp(8px, 1.5vh, 10px);
+  --title-size: clamp(24px, 3.2vw, 28px);
+  --body-size: clamp(12.5px, 1.55vw, 14px);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 [hidden] { display: none !important; }
 
 html, body {
+  width: 100%;
+  height: 100%;
   background: var(--bg-0);
   color: var(--text);
   font-family: 'Inter', -apple-system, system-ui, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', 'Hiragino Sans', sans-serif;
-  font-size: 14px;
+  font-size: var(--body-size);
   line-height: 1.55;
-  overflow-x: hidden;
+  overflow: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
 body {
-  min-height: 100vh;
+  min-height: 100%;
   position: relative;
   background:
     radial-gradient(ellipse 800px 600px at 15% -10%, rgba(255, 106, 0, 0.18), transparent 60%),
@@ -69,13 +78,13 @@ body {
 /* ============ HERO ============ */
 .hero {
   position: relative;
-  padding: 18px 32px 6px;
+  padding: var(--hero-pad-top) var(--page-pad-x) 6px;
   z-index: 1;
 }
 
 .hero-stripe {
   position: absolute;
-  left: 32px; top: 22px;
+  left: var(--page-pad-x); top: calc(var(--hero-pad-top) + 4px);
   width: 4px; height: 32px;
   background: linear-gradient(180deg, var(--accent), var(--accent-2));
   border-radius: 2px;
@@ -95,7 +104,7 @@ body {
 
 .hero-title {
   font-family: 'Rajdhani', sans-serif;
-  font-size: 28px;
+  font-size: var(--title-size);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.01em;
@@ -144,7 +153,7 @@ body {
 .hero-path-row {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 6px 32px 0 50px;
+  padding: 6px var(--page-pad-x) 0 calc(var(--page-pad-x) + 18px);
 }
 
 .hero-path {
@@ -173,7 +182,7 @@ body {
 .hero-path .dot.err { background: var(--danger); }
 
 #pathText {
-  max-width: 540px;
+  max-width: min(58vw, 540px);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -185,17 +194,19 @@ body {
   z-index: 1;
   max-width: 1080px;
   margin: 0 auto;
-  padding: 8px 32px 20px;
+  height: calc(100vh - clamp(78px, 15vh, 92px));
+  min-height: 0;
+  padding: 8px var(--page-pad-x) 14px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--section-gap);
 }
 
 .card {
   background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.01));
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 14px 16px;
+  padding: var(--card-pad-y) var(--card-pad-x);
   backdrop-filter: blur(20px);
   position: relative;
 }
@@ -250,7 +261,7 @@ body {
 }
 
 /* ============ PICKERS + DROPDOWN ============ */
-.pickers-card { padding: 16px; z-index: 50; }
+.pickers-card { padding: clamp(12px, 2vh, 16px); z-index: 50; }
 .dropdown.open { z-index: 60; }
 
 .picker-row {
@@ -371,7 +382,7 @@ body {
 }
 
 .dropdown.open .dd-menu {
-  max-height: 320px;
+  max-height: clamp(220px, 44vh, 320px);
   opacity: 1;
   transform: translateY(0) scaleY(1);
   pointer-events: auto;
@@ -490,7 +501,15 @@ body {
 .backup-card .step-title { flex: 1; font-size: 14px; font-weight: 600; }
 .step-actions { display: flex; gap: 6px; }
 
-.backup-list { display: flex; flex-direction: column; gap: 5px; }
+.backup-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-height: 0;
+  max-height: clamp(86px, 20vh, 142px);
+  overflow-y: auto;
+  padding-right: 2px;
+}
 
 .backup-empty {
   padding: 10px;
@@ -610,6 +629,19 @@ body {
 .modal-title { font-size: 16px; font-weight: 600; margin-bottom: 10px; }
 .modal-body { color: var(--text-dim); font-size: 13px; line-height: 1.6; margin-bottom: 18px; }
 .modal-actions { display: flex; justify-content: flex-end; gap: 10px; }
+
+@media (max-height: 540px) {
+  .card-label { margin-bottom: 6px; }
+  .execute-row { padding-top: 8px; }
+  .step-sub { line-height: 1.25; }
+  .backup-row { padding-block: 5px; }
+}
+
+@media (max-width: 860px) {
+  .picker-row { gap: 10px; }
+  .execute-btn { min-width: 210px; }
+  #pathText { max-width: min(48vw, 420px); }
+}
 
 /* ============ SCROLLBAR ============ */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
