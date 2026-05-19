@@ -16,6 +16,8 @@ The app locates the game's `StringTables` text files, copies your current text l
 
 Important: the game must be set to the selected voice language after the swap. For example, if you want English text with Japanese voice, select `English` under `Text to See`, select `Japanese` under `Voice to Hear`, then set the in-game language to `Japanese`.
 
+![FH6 Voice Swap example](example/exam.png)
+
 Each target language keeps one original `.zip.bak` backup. Existing backups are not overwritten by later swaps, and an already-swapped language cannot be used as the text source until it is restored.
 
 ## Build
