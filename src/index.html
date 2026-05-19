@@ -1,0 +1,131 @@
+<!doctype html>
+<!--
+  Forza Horizon 6 Voice Swap
+  Copyright (c) 2026 hj6hki123
+  SPDX-License-Identifier: MIT
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FH6 Voice Swap</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-speed"></div>
+
+  <header class="hero">
+    <div class="hero-stripe"></div>
+    <div class="hero-inner">
+      <h1 class="hero-title">VOICE<span class="accent">SWAP</span></h1>
+      <div class="hero-spacer"></div>
+      <label class="lang-select-wrap" for="localeSelect">
+        <span data-i18n="language_label">Language</span>
+        <select class="lang-select" id="localeSelect"></select>
+      </label>
+    </div>
+    <div class="hero-path-row">
+      <div class="hero-path" id="pathBar">
+        <span class="dot" id="pathDot"></span>
+        <span id="pathText" data-i18n="path_not_detected">Game executable not detected</span>
+        <button class="ghost-btn" id="browseBtn" data-i18n="path_change">Select EXE</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="card status-card">
+      <div class="card-label" data-i18n="status_label">CURRENT STATUS</div>
+      <div class="swap-viz">
+        <div class="swap-empty" id="swapEmpty">
+          <span class="muted" data-i18n="status_no_override">No override active</span>
+        </div>
+        <div class="swap-active" id="swapActive" hidden>
+          <div class="swap-active-head">
+            <span class="swap-active-title" id="swapHeadCount">—</span>
+            <span class="swap-active-sub" data-i18n="status_override_sub">These language files have been overwritten.</span>
+          </div>
+          <div class="swap-active-chips" id="swapActiveChips"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card pickers-card">
+      <div class="picker-row">
+        <div class="picker">
+          <div class="picker-head">
+            <div class="step-num">01</div>
+            <div class="picker-text">
+              <div class="step-title" data-i18n="step_caption_title">Current Game Language</div>
+              <div class="step-sub" data-i18n="step_caption_sub">The language your game is currently set to</div>
+            </div>
+          </div>
+          <div class="dropdown" id="ddDisplay" data-role="display">
+            <button class="dd-trigger" type="button">
+              <span class="dd-placeholder" data-i18n="dropdown_placeholder">Select...</span>
+              <span class="dd-chevron">▾</span>
+            </button>
+            <div class="dd-menu"></div>
+          </div>
+        </div>
+
+        <div class="picker-arrow">→</div>
+
+        <div class="picker">
+          <div class="picker-head">
+            <div class="step-num voice">02</div>
+            <div class="picker-text">
+              <div class="step-title" data-i18n="step_voice_title">Voice Target</div>
+              <div class="step-sub" data-i18n="step_voice_sub">The language to set in-game</div>
+            </div>
+          </div>
+          <div class="dropdown" id="ddVoice" data-role="voice">
+            <button class="dd-trigger" type="button">
+              <span class="dd-placeholder" data-i18n="dropdown_placeholder">Select...</span>
+              <span class="dd-chevron">▾</span>
+            </button>
+            <div class="dd-menu"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="execute-row">
+        <button class="execute-btn" id="executeBtn" disabled>
+          <span class="exec-label" data-i18n="btn_execute">EXECUTE SWAP</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="card backup-card">
+      <div class="step-row">
+        <div class="step-title" data-i18n="backup_label">Backup Manager</div>
+        <div class="step-actions">
+          <button class="ghost-btn" id="refreshBackupBtn" data-i18n="backup_refresh">Refresh</button>
+          <button class="primary-btn" id="resetAllBtn" data-i18n="backup_reset_all" hidden>Restore All</button>
+        </div>
+      </div>
+      <div class="backup-list" id="backupList">
+        <div class="backup-empty" data-i18n="backup_empty">No backups</div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <div id="modal" class="modal" hidden>
+    <div class="modal-backdrop"></div>
+    <div class="modal-box">
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-actions">
+        <button class="ghost-btn" id="modalNo" data-i18n="modal_no">Cancel</button>
+        <button class="primary-btn" id="modalYes" data-i18n="modal_yes">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>

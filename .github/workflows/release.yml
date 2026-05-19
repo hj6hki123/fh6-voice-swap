@@ -1,0 +1,44 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build executable
+        run: npx tauri build --no-bundle
+
+      - name: Rename executable
+        shell: pwsh
+        run: |
+          $tag = '${{ github.ref_name }}'
+          New-Item -ItemType Directory -Force -Path dist
+          Copy-Item -LiteralPath 'src-tauri\target\release\fh6-voice-swap.exe' -Destination "dist\fh6-voice-swap-$tag-windows-x64.exe"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.exe
