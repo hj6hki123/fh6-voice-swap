@@ -11,8 +11,10 @@ The app locates the game's `StringTables` text files, copies your current text l
 3. Select the text language you want to see in the first dropdown.
 4. Select the voice language you want to hear in the second dropdown.
 5. Click `Execute Swap`.
-6. Start the game and set the in-game language to the selected voice language.
+6. Start the game and manually set the in-game language to the selected voice language.
 7. Use the backup manager if you want to restore the original file later.
+
+Important: the game must be set to the selected voice language after the swap. For example, if you want English text with Japanese voice, select `English` under `Text to See`, select `Japanese` under `Voice to Hear`, then set the in-game language to `Japanese`.
 
 Each target language keeps one original `.zip.bak` backup. Existing backups are not overwritten by later swaps, and an already-swapped language cannot be used as the text source until it is restored.
 
