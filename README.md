@@ -1,5 +1,7 @@
 # Forza Horizon 6 Voice Swap
 
+![FH6 Voice Swap example](example/exam.png)
+
 Annoyed that the game ties text and voice language together? This Windows tool lets you use a different voice language without changing the text language you normally play with.
 
 The app locates the game's `StringTables` text files, copies your current text language `.zip`, and overwrites the target language `.zip`. After that, when you set the game to the target language, the game keeps using that target language's voice while reading the replaced text files. Before overwriting anything, the original target `.zip` is saved once as `.zip.bak` and kept until you restore it from the backup manager.
@@ -14,9 +16,7 @@ The app locates the game's `StringTables` text files, copies your current text l
 6. Start the game and manually set the in-game language to the selected voice language.
 7. Use the backup manager if you want to restore the original file later.
 
-Example: if you want Chinese text with Japanese voice, select `Chinese` under `Text to See`, select `Japanese` under `Voice to Hear`, then manually set the in-game language to `Japanese` after the swap.
-
-![FH6 Voice Swap example](example/exam.png)
+Example: if you want to see language A and hear language B, select language A under `Text to See`, select language B under `Voice to Hear`, then manually set the in-game language to language B after the swap.
 
 Each target language keeps one original `.zip.bak` backup. Existing backups are not overwritten by later swaps, and an already-swapped language cannot be used as the text source until it is restored.
 
