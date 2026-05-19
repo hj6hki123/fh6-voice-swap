@@ -14,7 +14,7 @@ The app locates the game's `StringTables` text files, copies your current text l
 6. Start the game and set the in-game language to the selected voice language.
 7. Use the backup manager if you want to restore the original file later.
 
-Each target language keeps one original `.zip.bak` backup. Existing backups are not overwritten by later swaps.
+Each target language keeps one original `.zip.bak` backup. Existing backups are not overwritten by later swaps, and an already-swapped language cannot be used as the text source until it is restored.
 
 ## Build
 
