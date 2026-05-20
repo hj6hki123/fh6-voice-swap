@@ -239,60 +239,34 @@ body {
 .swap-active-head { display: flex; flex-direction: column; gap: 2px; }
 .swap-active-title { font-size: 13px; font-weight: 600; color: var(--accent-2); }
 .swap-active-sub { font-size: 11px; color: var(--text-mute); line-height: 1.45; }
-.swap-active-chips { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px; margin-top: 2px; }
+.swap-active-chips { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 7px; margin-top: 2px; }
 
 .override-chip {
   display: flex;
-  align-items: stretch;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 9px 10px;
-  background: linear-gradient(135deg, rgba(255, 106, 0, 0.12), rgba(255, 106, 0, 0.035));
-  border: 1px solid rgba(255, 106, 0, 0.55);
-  border-radius: 12px;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 10px;
+  background: rgba(255, 106, 0, 0.08);
+  border: 1px solid rgba(255, 106, 0, 0.42);
+  border-radius: 10px;
   font-size: 11.5px;
   min-width: 0;
 }
-.override-chip .swap-main {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  min-width: 0;
-}
-.override-chip .swap-role {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: var(--text-mute);
-  text-transform: uppercase;
-}
-.override-chip .swap-title {
+.override-chip .swap-title,
+.override-chip .swap-text {
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 12.5px;
-  font-weight: 650;
   min-width: 0;
 }
-.override-chip .swap-badge {
-  align-self: end;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  max-width: 48%;
-  padding: 5px 8px;
-  background: rgba(0, 0, 0, 0.22);
-  border: 1px solid var(--border-strong);
-  border-radius: 999px;
-  color: var(--text-dim);
-  white-space: nowrap;
-}
-.override-chip .swap-badge strong {
+.override-chip .swap-title {
   color: var(--text);
   font-weight: 650;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 12.5px;
+}
+.override-chip .swap-text {
+  color: var(--text-mute);
+  font-size: 11px;
 }
 .override-chip .oc-code {
   font-family: 'Rajdhani', sans-serif;
@@ -464,7 +438,6 @@ body {
 }
 
 .dd-item .item-name { font-size: 12.5px; flex: 1; }
-.dd-item .item-sub { font-size: 10.5px; color: var(--text-mute); }
 
 .dd-item.disabled {
   opacity: 0.42;
@@ -566,18 +539,11 @@ body {
   border-radius: var(--radius-sm);
 }
 
-.backup-hint {
-  padding: 0 2px 4px;
-  color: var(--text-mute);
-  font-size: 11px;
-  line-height: 1.35;
-}
-
 .backup-row {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 6px 10px;
+  padding: 7px 10px;
   background: var(--bg-2);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
@@ -600,7 +566,6 @@ body {
 
 .backup-info { flex: 1; min-width: 0; }
 .backup-info .bi-name { font-size: 12px; font-weight: 500; }
-.backup-info .bi-meta { font-size: 10px; color: var(--text-mute); font-family: 'JetBrains Mono', monospace; }
 .backup-actions { display: flex; gap: 4px; }
 
 /* ============ BUTTONS ============ */
