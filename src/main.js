@@ -218,6 +218,15 @@ const t = (key, ...args) => {
   return typeof v === 'function' ? v(...args) : v;
 };
 
+const loadSwapMap = () => {
+  try {
+    return JSON.parse(localStorage.getItem('fh6vs.swapMap') || '{}');
+  } catch {
+    return {};
+  }
+};
+const saveSwapMap = (map) => localStorage.setItem('fh6vs.swapMap', JSON.stringify(map));
+
 // Locale info for codes (language-display names, never translated)
 const LOCALES = {
   BR:  { name: 'Português',  sub: 'Brasil' },
@@ -253,6 +262,7 @@ const state = {
   files: [],     // [{ code, filename, size }]
   backups: [],   // [{ code, filename, backup_size, modified }]
   modifiedSet: new Set(),  // codes that currently have a .bak
+  swapMap: loadSwapMap(),  // voice code -> text code
   selectedDisplay: null,
   selectedVoice: null,
 };
@@ -436,10 +446,14 @@ function renderOverride() {
   const chips = $('swapActiveChips');
   chips.innerHTML = '';
   for (const b of state.backups) {
-    const info = localeInfo(b.code);
+    const textCode = state.swapMap[b.code];
+    const textInfo = textCode ? localeInfo(textCode) : null;
+    const voiceInfo = localeInfo(b.code);
     const el = document.createElement('div');
     el.className = 'override-chip';
-    el.innerHTML = `<span class="oc-code">${b.code}</span><span>${info.name} · ${info.sub}</span>`;
+    el.innerHTML = textInfo
+      ? `<span class="oc-code">${textCode}</span><span>${textInfo.name}</span><span style="color:var(--text-mute)">→</span><span class="oc-code">${b.code}</span><span>${voiceInfo.name}</span>`
+      : `<span class="oc-code">${b.code}</span><span>${voiceInfo.name} · ${voiceInfo.sub}</span>`;
     chips.appendChild(el);
   }
 }
@@ -499,6 +513,9 @@ async function loadFolder(p) {
     state.files = data.files;
     state.backups = data.backups;
     state.modifiedSet = new Set(data.backups.map(b => b.code));
+    const activeCodes = new Set(data.backups.map(b => b.code));
+    state.swapMap = Object.fromEntries(Object.entries(state.swapMap).filter(([code]) => activeCodes.has(code)));
+    saveSwapMap(state.swapMap);
     // Reset selection if it became invalid
     if (state.selectedDisplay && state.modifiedSet.has(state.selectedDisplay)) {
       state.selectedDisplay = null;
@@ -541,6 +558,8 @@ executeBtn.addEventListener('click', async () => {
   if (!await confirmDialog(t('modal_swap_title'), t('modal_swap_body', di, vi))) return;
   try {
     await invoke('do_swap', { dir: state.dir, displayCode: d, voiceCode: v });
+    state.swapMap[v] = d;
+    saveSwapMap(state.swapMap);
     showToast(t('toast_swap_ok', d, v), 'success');
     await refreshFolder();
   } catch (e) {
@@ -553,6 +572,8 @@ async function doRestore(code) {
   if (!await confirmDialog(t('modal_restore_title'), t('modal_restore_body', info))) return;
   try {
     await invoke('do_restore', { dir: state.dir, code });
+    delete state.swapMap[code];
+    saveSwapMap(state.swapMap);
     showToast(t('toast_restore_ok', code), 'success');
     await refreshFolder();
   } catch (e) {
@@ -565,6 +586,8 @@ resetAllBtn.addEventListener('click', async () => {
   if (!await confirmDialog(t('modal_reset_title'), t('modal_reset_body', n))) return;
   try {
     const restored = await invoke('reset_all', { dir: state.dir });
+    state.swapMap = {};
+    saveSwapMap(state.swapMap);
     showToast(t('toast_reset_ok', restored), 'success');
     await refreshFolder();
   } catch (e) {
