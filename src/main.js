@@ -290,6 +290,24 @@ const ddVoice = $('ddVoice');
 const localeSelect = $('localeSelect');
 
 // ============ helpers ============
+const fmtBytes = (n) => {
+  if (n == null) return '—';
+  if (n < 1024) return n + ' B';
+  if (n < 1024 * 1024) return (n / 1024).toFixed(1) + ' KB';
+  return (n / 1024 / 1024).toFixed(2) + ' MB';
+};
+const fmtDate = (ts) => ts ? new Date(ts * 1000).toLocaleString() : '—';
+
+// Resize window to fit content (only grows, never shrinks user's manual size)
+async function autoFitHeight() {
+  try {
+    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+    const needed = Math.ceil(document.documentElement.scrollHeight) + 8;
+    if (needed <= window.innerHeight + 1) return;
+    await invoke('fit_window_size', { width: window.innerWidth, height: needed });
+  } catch (e) { console.warn('autofit', e); }
+}
+
 function showToast(msg, kind = '') {
   toast.textContent = msg;
   toast.className = 'toast show ' + kind;
@@ -324,6 +342,7 @@ function applyI18n() {
   renderDropdowns();
   renderBackups();
   renderOverride();
+  autoFitHeight();
 }
 
 for (const [code, label] of LANGUAGE_OPTIONS) {
@@ -450,8 +469,8 @@ function renderOverride() {
     const el = document.createElement('div');
     el.className = 'override-chip';
     el.innerHTML = textInfo
-      ? `<div class="swap-title"><span class="oc-code">${b.code}</span><span>${localeDisplay(voiceInfo)}</span></div><div class="swap-text"><span>${t('active_text_badge')}:</span><span class="oc-code">${textCode}</span><span>${localeDisplay(textInfo)}</span></div>`
-      : `<div class="swap-title"><span class="oc-code">${b.code}</span><span>${localeDisplay(voiceInfo)}</span></div>`;
+      ? `<div class="oc-main"><span class="oc-code">${b.code}</span><span class="oc-name">${localeDisplay(voiceInfo)}</span></div><div class="oc-sub"><span class="oc-sub-label">${t('active_text_badge')}:</span><span class="oc-code oc-code-sm">${textCode}</span><span>${localeDisplay(textInfo)}</span></div>`
+      : `<div class="oc-main"><span class="oc-code">${b.code}</span><span class="oc-name">${localeDisplay(voiceInfo)}</span></div>`;
     chips.appendChild(el);
   }
 }
@@ -471,6 +490,7 @@ function renderBackups() {
       <div class="backup-code">${b.code}</div>
       <div class="backup-info">
         <div class="bi-name">${localeDisplay(info)}</div>
+        <div class="bi-meta">${b.filename}.bak · ${fmtBytes(b.backup_size)} · ${fmtDate(b.modified)}</div>
       </div>
       <div class="backup-actions">
         <button class="primary-btn" data-action="restore" data-code="${b.code}">${t('backup_restore')}</button>
@@ -522,6 +542,7 @@ async function loadFolder(p) {
     renderBackups();
     renderOverride();
     refreshExecuteState();
+    autoFitHeight();
   } catch (e) {
     setPath(p, false);
     showToast(t('toast_err', String(e)), 'error');

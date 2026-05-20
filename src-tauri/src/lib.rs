@@ -230,6 +230,13 @@ fn reset_all(dir: String) -> Result<u32, String> {
     Ok(restored)
 }
 
+#[tauri::command]
+fn fit_window_size(window: tauri::Window, width: f64, height: f64) -> Result<(), String> {
+    window
+        .set_size(tauri::LogicalSize::new(width, height))
+        .map_err(|e| e.to_string())
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -240,7 +247,8 @@ pub fn run() {
             scan_folder,
             do_swap,
             do_restore,
-            reset_all
+            reset_all,
+            fit_window_size
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

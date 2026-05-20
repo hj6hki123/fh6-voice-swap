@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "FH6 Voice Swap",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "identifier": "com.fh6.voiceswap",
   "build": {
     "frontendDist": "../src",
