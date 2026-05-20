@@ -24,7 +24,8 @@ const I18N = {
     status_no_override: 'No override active — game is in original state',
     status_override_count: (n) => `${n} language${n>1?'s':''} currently overridden`,
     status_override_sub: 'These language choices are active. Set the game to the shown voice language to hear that voice with your chosen text language.',
-    active_file_label: 'text file uses',
+    active_game_label: 'Game language',
+    active_text_badge: 'Text',
     step_caption_title: 'Text to See',
     step_caption_sub: 'Choose the language you want to read',
     step_voice_title: 'Voice to Hear',
@@ -61,7 +62,8 @@ const I18N = {
     status_no_override: '目前沒有任何替換，遊戲為原始狀態',
     status_override_count: (n) => `${n} 個語言已被覆寫`,
     status_override_sub: '這些語言選擇已套用。請把遊戲語言設為顯示的語音語言，就能聽到該語音並看到你選擇的文字。',
-    active_file_label: '文字檔使用',
+    active_game_label: '遊戲內選擇',
+    active_text_badge: '文字',
     step_caption_title: '想看到的文字',
     step_caption_sub: '選擇你想閱讀的語言',
     step_voice_title: '想聽到的語音',
@@ -98,7 +100,8 @@ const I18N = {
     status_no_override: '置換なし — ゲームは初期状態です',
     status_override_count: (n) => `${n} 言語が上書きされています`,
     status_override_sub: 'これらの言語設定が有効です。表示されている音声言語をゲーム内で選ぶと、選択したテキスト言語と音声で遊べます。',
-    active_file_label: 'テキストファイルは',
+    active_game_label: 'ゲーム内言語',
+    active_text_badge: '文字',
     step_caption_title: '表示したい文字',
     step_caption_sub: '読みたいテキスト言語を選択',
     step_voice_title: '聞きたい音声',
@@ -135,7 +138,8 @@ const I18N = {
     status_no_override: 'No hay reemplazos activos; el juego está en su estado original',
     status_override_count: (n) => `${n} idioma${n>1?'s':''} sobrescrito${n>1?'s':''}`,
     status_override_sub: 'Estas opciones de idioma están activas. Configura el juego en el idioma de voz mostrado para oír esa voz con el texto elegido.',
-    active_file_label: 'usa texto de',
+    active_game_label: 'Idioma del juego',
+    active_text_badge: 'Texto',
     step_caption_title: 'Texto que quieres ver',
     step_caption_sub: 'Elige el idioma que quieres leer',
     step_voice_title: 'Voz que quieres oír',
@@ -172,7 +176,8 @@ const I18N = {
     status_no_override: '활성화된 교체 없음 - 게임은 원본 상태입니다',
     status_override_count: (n) => `현재 ${n}개 언어가 덮어쓰기됨`,
     status_override_sub: '이 언어 선택이 적용되었습니다. 게임 언어를 표시된 음성 언어로 설정하면 선택한 텍스트와 해당 음성으로 플레이할 수 있습니다.',
-    active_file_label: '텍스트 파일 사용',
+    active_game_label: '게임 언어',
+    active_text_badge: '텍스트',
     step_caption_title: '보고 싶은 텍스트',
     step_caption_sub: '읽고 싶은 언어를 선택하세요',
     step_voice_title: '듣고 싶은 음성',
@@ -237,34 +242,35 @@ const loadSwapMap = () => {
 };
 const saveSwapMap = (map) => localStorage.setItem('fh6vs.swapMap', JSON.stringify(map));
 
-// Locale info for codes (language-display names, never translated)
+// Locale info for game language codes.
 const LOCALES = {
-  BR:  { name: 'Português',  sub: 'Brasil' },
-  CHS: { name: '简体中文',    sub: 'Simplified' },
-  CHT: { name: '繁體中文',    sub: 'Traditional' },
-  CZ:  { name: 'Čeština',    sub: 'Czech' },
-  DE:  { name: 'Deutsch',    sub: 'German' },
-  DK:  { name: 'Dansk',      sub: 'Danish' },
-  EL:  { name: 'Ελληνικά',   sub: 'Greek' },
-  EN:  { name: 'English',    sub: 'United States' },
-  ES:  { name: 'Español',    sub: 'España' },
-  FI:  { name: 'Suomi',      sub: 'Finnish' },
-  FR:  { name: 'Français',   sub: 'French' },
-  GB:  { name: 'English',    sub: 'United Kingdom' },
-  HU:  { name: 'Magyar',     sub: 'Hungarian' },
-  IT:  { name: 'Italiano',   sub: 'Italian' },
-  JP:  { name: '日本語',     sub: 'Japanese' },
-  KO:  { name: '한국어',     sub: 'Korean' },
-  MX:  { name: 'Español',    sub: 'México' },
-  NL:  { name: 'Nederlands', sub: 'Dutch' },
-  NO:  { name: 'Norsk',      sub: 'Norwegian' },
-  PL:  { name: 'Polski',     sub: 'Polish' },
-  PT:  { name: 'Português',  sub: 'Portugal' },
-  RU:  { name: 'Русский',    sub: 'Russian' },
-  SV:  { name: 'Svenska',    sub: 'Swedish' },
-  TR:  { name: 'Türkçe',     sub: 'Turkish' },
+  BR:  { name: 'Brazilian Portuguese', native: 'Português (Brasil)' },
+  CHS: { name: 'Simplified Chinese', native: '简体中文' },
+  CHT: { name: 'Traditional Chinese', native: '繁體中文' },
+  CZ:  { name: 'Czech', native: 'Čeština' },
+  DE:  { name: 'German', native: 'Deutsch' },
+  DK:  { name: 'Danish', native: 'Dansk' },
+  EL:  { name: 'Greek', native: 'Ελληνικά' },
+  EN:  { name: 'English (US)', native: 'English' },
+  ES:  { name: 'Spanish (Spain)', native: 'Español (España)' },
+  FI:  { name: 'Finnish', native: 'Suomi' },
+  FR:  { name: 'French', native: 'Français' },
+  GB:  { name: 'English (UK)', native: 'English' },
+  HU:  { name: 'Hungarian', native: 'Magyar' },
+  IT:  { name: 'Italian', native: 'Italiano' },
+  JP:  { name: 'Japanese', native: '日本語' },
+  KO:  { name: 'Korean', native: '한국어' },
+  MX:  { name: 'Spanish (Mexico)', native: 'Español (México)' },
+  NL:  { name: 'Dutch', native: 'Nederlands' },
+  NO:  { name: 'Norwegian', native: 'Norsk' },
+  PL:  { name: 'Polish', native: 'Polski' },
+  PT:  { name: 'Portuguese (Portugal)', native: 'Português (Portugal)' },
+  RU:  { name: 'Russian', native: 'Русский' },
+  SV:  { name: 'Swedish', native: 'Svenska' },
+  TR:  { name: 'Turkish', native: 'Türkçe' },
 };
-const localeInfo = (code) => LOCALES[code] || { name: code, sub: '—' };
+const localeInfo = (code) => LOCALES[code] || { name: code, native: code };
+const localeDisplay = (info) => info.native && info.native !== info.name ? `${info.name} / ${info.native}` : info.name;
 
 // ============ State ============
 const state = {
@@ -379,7 +385,7 @@ function renderDropdown(dd, selected, role, onSelect) {
   if (selected) {
     left.className = 'dd-selected';
     const info = localeInfo(selected);
-    left.innerHTML = `<span class="sel-code">${selected}</span><span class="sel-name">${info.name} <span style="color:var(--text-mute);font-size:11px">· ${info.sub}</span></span>`;
+    left.innerHTML = `<span class="sel-code">${selected}</span><span class="sel-name">${localeDisplay(info)}</span>`;
   } else {
     left.className = 'dd-placeholder';
     left.textContent = t('dropdown_placeholder');
@@ -409,7 +415,7 @@ function renderDropdown(dd, selected, role, onSelect) {
                   : '';
     item.innerHTML = `
       <span class="item-code">${f.code}</span>
-      <span class="item-name">${info.name} <span class="item-sub">· ${info.sub}</span></span>
+      <span class="item-name">${localeDisplay(info)}</span>
       ${tagText ? `<span class="item-tag">${tagText}</span>` : ''}
     `;
     if (!(role === 'display' && isModified)) {
@@ -462,8 +468,8 @@ function renderOverride() {
     const el = document.createElement('div');
     el.className = 'override-chip';
     el.innerHTML = textInfo
-      ? `<span class="swap-part"><span class="oc-code">${b.code}</span><span>${voiceInfo.name}</span></span><span class="swap-role">${t('active_file_label')}</span><span class="swap-part"><span class="oc-code">${textCode}</span><span>${textInfo.name}</span></span>`
-      : `<span class="oc-code">${b.code}</span><span>${voiceInfo.name} · ${voiceInfo.sub}</span>`;
+      ? `<div class="swap-main"><span class="swap-role">${t('active_game_label')}</span><span class="swap-title"><span class="oc-code">${b.code}</span>${localeDisplay(voiceInfo)}</span></div><div class="swap-badge"><span>${t('active_text_badge')}</span><span class="oc-code">${textCode}</span><strong>${localeDisplay(textInfo)}</strong></div>`
+      : `<div class="swap-main"><span class="swap-role">${t('active_game_label')}</span><span class="swap-title"><span class="oc-code">${b.code}</span>${localeDisplay(voiceInfo)}</span></div>`;
     chips.appendChild(el);
   }
 }
@@ -482,7 +488,7 @@ function renderBackups() {
     row.innerHTML = `
       <div class="backup-code">${b.code}</div>
       <div class="backup-info">
-        <div class="bi-name">${info.name} <span style="color:var(--text-mute)">· ${info.sub}</span></div>
+        <div class="bi-name">${localeDisplay(info)}</div>
         <div class="bi-meta">${b.filename}.bak · ${fmtBytes(b.backup_size)} · ${fmtDate(b.modified)}</div>
       </div>
       <div class="backup-actions">
