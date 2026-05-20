@@ -24,8 +24,7 @@ const I18N = {
     status_no_override: 'No override active — game is in original state',
     status_override_count: (n) => `${n} language${n>1?'s':''} currently overridden`,
     status_override_sub: 'These language choices are active. Set the game to the shown voice language to hear that voice with your chosen text language.',
-    active_text_label: 'Text',
-    active_voice_label: 'Voice',
+    active_file_label: 'text file uses',
     step_caption_title: 'Text to See',
     step_caption_sub: 'Choose the language you want to read',
     step_voice_title: 'Voice to Hear',
@@ -62,8 +61,7 @@ const I18N = {
     status_no_override: '目前沒有任何替換，遊戲為原始狀態',
     status_override_count: (n) => `${n} 個語言已被覆寫`,
     status_override_sub: '這些語言選擇已套用。請把遊戲語言設為顯示的語音語言，就能聽到該語音並看到你選擇的文字。',
-    active_text_label: '文字',
-    active_voice_label: '語音',
+    active_file_label: '文字檔使用',
     step_caption_title: '想看到的文字',
     step_caption_sub: '選擇你想閱讀的語言',
     step_voice_title: '想聽到的語音',
@@ -100,8 +98,7 @@ const I18N = {
     status_no_override: '置換なし — ゲームは初期状態です',
     status_override_count: (n) => `${n} 言語が上書きされています`,
     status_override_sub: 'これらの言語設定が有効です。表示されている音声言語をゲーム内で選ぶと、選択したテキスト言語と音声で遊べます。',
-    active_text_label: '文字',
-    active_voice_label: '音声',
+    active_file_label: 'テキストファイルは',
     step_caption_title: '表示したい文字',
     step_caption_sub: '読みたいテキスト言語を選択',
     step_voice_title: '聞きたい音声',
@@ -138,8 +135,7 @@ const I18N = {
     status_no_override: 'No hay reemplazos activos; el juego está en su estado original',
     status_override_count: (n) => `${n} idioma${n>1?'s':''} sobrescrito${n>1?'s':''}`,
     status_override_sub: 'Estas opciones de idioma están activas. Configura el juego en el idioma de voz mostrado para oír esa voz con el texto elegido.',
-    active_text_label: 'Texto',
-    active_voice_label: 'Voz',
+    active_file_label: 'usa texto de',
     step_caption_title: 'Texto que quieres ver',
     step_caption_sub: 'Elige el idioma que quieres leer',
     step_voice_title: 'Voz que quieres oír',
@@ -176,8 +172,7 @@ const I18N = {
     status_no_override: '활성화된 교체 없음 - 게임은 원본 상태입니다',
     status_override_count: (n) => `현재 ${n}개 언어가 덮어쓰기됨`,
     status_override_sub: '이 언어 선택이 적용되었습니다. 게임 언어를 표시된 음성 언어로 설정하면 선택한 텍스트와 해당 음성으로 플레이할 수 있습니다.',
-    active_text_label: '텍스트',
-    active_voice_label: '음성',
+    active_file_label: '텍스트 파일 사용',
     step_caption_title: '보고 싶은 텍스트',
     step_caption_sub: '읽고 싶은 언어를 선택하세요',
     step_voice_title: '듣고 싶은 음성',
@@ -467,7 +462,7 @@ function renderOverride() {
     const el = document.createElement('div');
     el.className = 'override-chip';
     el.innerHTML = textInfo
-      ? `<span class="swap-part"><span class="swap-role">${t('active_text_label')}</span><span class="oc-code">${textCode}</span><span>${textInfo.name}</span></span><span class="swap-part"><span class="swap-role">${t('active_voice_label')}</span><span class="oc-code">${b.code}</span><span>${voiceInfo.name}</span></span>`
+      ? `<span class="swap-part"><span class="oc-code">${b.code}</span><span>${voiceInfo.name}</span></span><span class="swap-role">${t('active_file_label')}</span><span class="swap-part"><span class="oc-code">${textCode}</span><span>${textInfo.name}</span></span>`
       : `<span class="oc-code">${b.code}</span><span>${voiceInfo.name} · ${voiceInfo.sub}</span>`;
     chips.appendChild(el);
   }
