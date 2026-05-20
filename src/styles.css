@@ -242,12 +242,25 @@ body {
 .swap-active-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
 
 .override-chip {
-  display: inline-flex; align-items: center; gap: 7px;
-  padding: 4px 10px 4px 4px;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 10px;
   background: rgba(255, 106, 0, 0.08);
   border: 1px solid var(--accent);
-  border-radius: 999px;
+  border-radius: 12px;
   font-size: 11.5px;
+}
+.override-chip .swap-part {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.override-chip .swap-role {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-mute);
+  text-transform: uppercase;
 }
 .override-chip .oc-code {
   font-family: 'Rajdhani', sans-serif;
@@ -519,6 +532,13 @@ body {
   background: rgba(255,255,255,0.015);
   border: 1px dashed var(--border);
   border-radius: var(--radius-sm);
+}
+
+.backup-hint {
+  padding: 0 2px 4px;
+  color: var(--text-mute);
+  font-size: 11px;
+  line-height: 1.35;
 }
 
 .backup-row {

@@ -24,6 +24,8 @@ const I18N = {
     status_no_override: 'No override active — game is in original state',
     status_override_count: (n) => `${n} language${n>1?'s':''} currently overridden`,
     status_override_sub: 'These language choices are active. Set the game to the shown voice language to hear that voice with your chosen text language.',
+    active_text_label: 'Text',
+    active_voice_label: 'Voice',
     step_caption_title: 'Text to See',
     step_caption_sub: 'Choose the language you want to read',
     step_voice_title: 'Voice to Hear',
@@ -33,6 +35,7 @@ const I18N = {
     tag_blocked: 'CANNOT USE',
     btn_execute: 'EXECUTE SWAP',
     backup_label: 'Backup Manager',
+    backup_hint: 'Restore a voice language to its original files. This removes the swap for that language.',
     backup_refresh: 'Refresh',
     backup_reset_all: 'Restore All',
     backup_empty: 'No backups — they appear automatically after a swap',
@@ -59,6 +62,8 @@ const I18N = {
     status_no_override: '目前沒有任何替換，遊戲為原始狀態',
     status_override_count: (n) => `${n} 個語言已被覆寫`,
     status_override_sub: '這些語言選擇已套用。請把遊戲語言設為顯示的語音語言，就能聽到該語音並看到你選擇的文字。',
+    active_text_label: '文字',
+    active_voice_label: '語音',
     step_caption_title: '想看到的文字',
     step_caption_sub: '選擇你想閱讀的語言',
     step_voice_title: '想聽到的語音',
@@ -68,6 +73,7 @@ const I18N = {
     tag_blocked: '不能選',
     btn_execute: '執行替換',
     backup_label: '備份管理',
+    backup_hint: '還原被替換的語音語言，讓該語言回到原始檔案並移除這組替換。',
     backup_refresh: '重新整理',
     backup_reset_all: '全部還原',
     backup_empty: '目前沒有任何備份 — 執行替換後會自動產生',
@@ -94,6 +100,8 @@ const I18N = {
     status_no_override: '置換なし — ゲームは初期状態です',
     status_override_count: (n) => `${n} 言語が上書きされています`,
     status_override_sub: 'これらの言語設定が有効です。表示されている音声言語をゲーム内で選ぶと、選択したテキスト言語と音声で遊べます。',
+    active_text_label: '文字',
+    active_voice_label: '音声',
     step_caption_title: '表示したい文字',
     step_caption_sub: '読みたいテキスト言語を選択',
     step_voice_title: '聞きたい音声',
@@ -103,6 +111,7 @@ const I18N = {
     tag_blocked: '選択不可',
     btn_execute: '実行',
     backup_label: 'バックアップ管理',
+    backup_hint: '置換された音声言語を元のファイルに戻し、その言語の置換を解除します。',
     backup_refresh: '再読込',
     backup_reset_all: '全て復元',
     backup_empty: 'バックアップがありません — 置換後に自動生成されます',
@@ -129,6 +138,8 @@ const I18N = {
     status_no_override: 'No hay reemplazos activos; el juego está en su estado original',
     status_override_count: (n) => `${n} idioma${n>1?'s':''} sobrescrito${n>1?'s':''}`,
     status_override_sub: 'Estas opciones de idioma están activas. Configura el juego en el idioma de voz mostrado para oír esa voz con el texto elegido.',
+    active_text_label: 'Texto',
+    active_voice_label: 'Voz',
     step_caption_title: 'Texto que quieres ver',
     step_caption_sub: 'Elige el idioma que quieres leer',
     step_voice_title: 'Voz que quieres oír',
@@ -138,6 +149,7 @@ const I18N = {
     tag_blocked: 'NO DISPONIBLE',
     btn_execute: 'EJECUTAR CAMBIO',
     backup_label: 'Gestor de copias',
+    backup_hint: 'Restaura un idioma de voz a sus archivos originales y elimina ese cambio.',
     backup_refresh: 'Actualizar',
     backup_reset_all: 'Restaurar todo',
     backup_empty: 'No hay copias; aparecerán automáticamente después de un cambio',
@@ -164,6 +176,8 @@ const I18N = {
     status_no_override: '활성화된 교체 없음 - 게임은 원본 상태입니다',
     status_override_count: (n) => `현재 ${n}개 언어가 덮어쓰기됨`,
     status_override_sub: '이 언어 선택이 적용되었습니다. 게임 언어를 표시된 음성 언어로 설정하면 선택한 텍스트와 해당 음성으로 플레이할 수 있습니다.',
+    active_text_label: '텍스트',
+    active_voice_label: '음성',
     step_caption_title: '보고 싶은 텍스트',
     step_caption_sub: '읽고 싶은 언어를 선택하세요',
     step_voice_title: '듣고 싶은 음성',
@@ -173,6 +187,7 @@ const I18N = {
     tag_blocked: '사용 불가',
     btn_execute: '교체 실행',
     backup_label: '백업 관리자',
+    backup_hint: '교체된 음성 언어를 원본 파일로 복원하고 해당 교체를 제거합니다.',
     backup_refresh: '새로고침',
     backup_reset_all: '모두 복원',
     backup_empty: '백업 없음 - 교체 후 자동으로 생성됩니다',
@@ -452,7 +467,7 @@ function renderOverride() {
     const el = document.createElement('div');
     el.className = 'override-chip';
     el.innerHTML = textInfo
-      ? `<span class="oc-code">${textCode}</span><span>${textInfo.name}</span><span style="color:var(--text-mute)">→</span><span class="oc-code">${b.code}</span><span>${voiceInfo.name}</span>`
+      ? `<span class="swap-part"><span class="swap-role">${t('active_text_label')}</span><span class="oc-code">${textCode}</span><span>${textInfo.name}</span></span><span class="swap-part"><span class="swap-role">${t('active_voice_label')}</span><span class="oc-code">${b.code}</span><span>${voiceInfo.name}</span></span>`
       : `<span class="oc-code">${b.code}</span><span>${voiceInfo.name} · ${voiceInfo.sub}</span>`;
     chips.appendChild(el);
   }
@@ -464,7 +479,7 @@ function renderBackups() {
     backupList.innerHTML = `<div class="backup-empty">${t('backup_empty')}</div>`;
     return;
   }
-  backupList.innerHTML = '';
+  backupList.innerHTML = `<div class="backup-hint">${t('backup_hint')}</div>`;
   for (const b of state.backups) {
     const info = localeInfo(b.code);
     const row = document.createElement('div');
